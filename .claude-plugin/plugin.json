@@ -1,10 +1,10 @@
 {
-  "name": "dl-paper-diagrams",
+  "name": "make-figure",
   "description": "Deep-learning architecture figures in ML-paper style: interactive HTML (shapes on hover, data-flow tracing, step-through) plus static SVG for READMEs.",
   "version": "0.1.0",
   "author": {"name": "Genndoso"},
-  "homepage": "https://github.com/Genndoso/dl-paper-diagrams",
-  "repository": "https://github.com/Genndoso/dl-paper-diagrams",
+  "homepage": "https://github.com/WeihangGuo/make-figure",
+  "repository": "https://github.com/WeihangGuo/make-figure",
   "license": "MIT",
   "keywords": ["diagrams", "deep-learning", "architecture", "svg", "skill"]
 }

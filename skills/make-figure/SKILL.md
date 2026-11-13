@@ -1,9 +1,9 @@
 ---
-name: dl-paper-diagrams
+name: make-figure
 description: Draws deep-learning architecture figures in the style of ML papers (towers, layer stacks, tensors with shapes, LoRA insets, logit matrices, loss heads) as an interactive HTML page plus a static SVG for READMEs. Use when the user asks for a model/architecture diagram, "схема архитектуры", "как в статье", a figure for a paper or report, a diagram of a loss, attention or logit matrix, or wants an existing mermaid/flowchart architecture diagram to look more like a DL paper.
 ---
 
-# DL paper diagrams
+# Make Figure
 
 Turn a model into a figure that reads like one from an ML paper. Write a JSON spec, run `scripts/render.py`, and check the render.
 - **Interactive HTML:** hover a block to see its tensor shapes and details, click to trace the data flow, step through an explanation, filter by tag, download SVG or PNG.
