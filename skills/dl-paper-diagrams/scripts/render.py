@@ -8,6 +8,8 @@ No dependencies beyond the standard library. See SKILL.md for the spec format.
 from __future__ import annotations
 
 import argparse
+import base64
+from functools import lru_cache
 import html
 import json
 import re
@@ -45,8 +47,20 @@ DARK = {kind: (blend(PALETTE[name], "#141414", 0.75),
 DARK.update({"plain": ("#1e1e1e", "#bbbbbb"), "op": ("#1e1e1e", "#bbbbbb")})
 LEGEND_NAMES = {"frozen": "frozen", "train": "trainable", "tensor": "tensor", "loss": "loss", "target": "target / positive",
                 "side": "side input", "hard": "hard negative", "mask": "masked"}
-FONT = "Helvetica, Arial, sans-serif"
-MONO = "Menlo, Consolas, monospace"
+FONT = "Newsreader, Georgia, serif"
+MONO = FONT
+
+
+@lru_cache(maxsize=1)
+def font_css():
+    """Embed Newsreader so exported figures do not need installed fonts."""
+    folder = Path(__file__).resolve().parent.parent / "assets" / "fonts"
+    rules = []
+    for style, filename in (("normal", "Newsreader.ttf"), ("italic", "Newsreader-Italic.ttf")):
+        data = base64.b64encode((folder / filename).read_bytes()).decode("ascii")
+        rules.append("@font-face{font-family:Newsreader;font-style:" + style
+                     + ";font-weight:200 800;src:url(data:font/ttf;base64," + data + ") format('truetype');}")
+    return "".join(rules)
 
 
 # ------------------------------------------------------------- markup -------
@@ -325,7 +339,7 @@ class Renderer:
         if s.get("caption"):
             self.text(W / 2, H - (36 if s.get("legend") else 12), s["caption"], size=12, color=self.sub, italic=True)
         head = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" '
-                f'font-family="{FONT}">\n<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
+                f'font-family="{FONT}">\n<style>{font_css()}</style><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
                 f'markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="{self.ink}"/></marker>'
                 f'</defs>\n<rect width="{W}" height="{H}" fill="{self.bg}"/>\n')
         return head + "\n".join(self.out) + "\n</svg>\n"
@@ -339,7 +353,7 @@ HTML = """<!doctype html>
 :root{--bg:#fafafa;--card:#fff;--ink:#222;--sub:#666;--line:#ddd;--acc:#233b91}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111;--card:#1b1b1b;--ink:#e8e8e8;--sub:#aaa;--line:#333;--acc:#a5d3f2}}
 :root[data-theme="dark"]{--bg:#111;--card:#1b1b1b;--ink:#e8e8e8;--sub:#aaa;--line:#333;--acc:#a5d3f2}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Helvetica,Arial,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Newsreader,Georgia,serif}
 main{max-width:1280px;margin:0 auto;padding:16px}
 h1{font-size:18px;margin:4px 0 10px}
 .bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px}
@@ -354,7 +368,7 @@ button.on{border-color:var(--acc);color:var(--acc)}
 path.edge.hl{stroke-width:2.6 !important;stroke:var(--acc) !important}
 #tip{position:fixed;pointer-events:none;max-width:340px;background:var(--card);color:var(--ink);border:1px solid var(--line);
  border-radius:8px;padding:8px 10px;font-size:12.5px;box-shadow:0 4px 18px rgba(0,0,0,.15);display:none;z-index:9}
-#tip b{display:block;margin-bottom:2px}#tip code{font-family:Menlo,Consolas,monospace;font-size:12px;color:var(--acc)}
+#tip b{display:block;margin-bottom:2px}#tip code{font-family:Newsreader,Georgia,serif;font-size:12px;color:var(--acc)}
 #tip .k{color:var(--sub);font-size:11px}
 #step{min-height:22px;color:var(--sub);margin:8px 2px 0}
 .cap{color:var(--sub);font-size:13px;margin:8px 2px}

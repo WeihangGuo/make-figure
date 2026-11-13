@@ -8,6 +8,12 @@ A Claude Code / Agent skill that draws neural-network figures in the style of ML
 
 ![logit matrix example](skills/dl-paper-diagrams/examples/infonce_logits.svg)
 
+## Font
+
+All figure text uses Newsreader. Regular and italic font files are embedded
+in the SVG, so browser previews do not need a local font installation.
+The font uses the SIL Open Font License; see `assets/fonts/OFL.txt` inside the skill.
+
 ## Colours
 
 The default palette follows the supplied AF3 reference: navy, orange, green,

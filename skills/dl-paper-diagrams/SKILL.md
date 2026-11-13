@@ -53,8 +53,14 @@ Standard library only, no installs. Full spec reference: [references/spec.md](re
 - Operators as circles (`type: op`: `+`, `⊕`, `·`, `s·cos`). Residual paths run along the side with `via` points.
 - Weight sharing: an edge with `"style": "share"` and a label. Optional or inference-only paths: `"style": "dashed"`.
 - At most ~25 blocks per figure. Split anything bigger.
-- No logos, gradients, shadows or 3D. Fonts stay Helvetica / Menlo.
+- No logos, gradients, shadows or 3D. Use Newsreader for titles, labels, dimensions, formulas and captions. The renderer embeds regular and italic font files in each SVG.
 
 ## When not to use it
 
 Pipelines, infra and data flows (jobs, tables, services) read better as plain mermaid flowcharts. Use this skill for the neural network and its objective.
+
+## Preview after each change
+
+After each requested change, render both example figures to PNG. Check the
+actual images, then show both previews in the reply. Do not return only links
+to source files. Wait for fonts to load before capture.
