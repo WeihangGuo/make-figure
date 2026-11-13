@@ -309,7 +309,9 @@ class Renderer:
                       anchor="middle" if horiz else "start", mono=e.get("mono", False))
 
     def legend(self, kinds, y):
-        x = 20
+        names = [LEGEND_NAMES.get(k, k) if isinstance(k, str) else k[1] for k in kinds]
+        width = sum(34 + 6.5 * len(name) for name in names) - 14
+        x = (self.spec.get("width", 1200) - width) / 2 if self.spec.get("legend_align") == "center" else 20
         for k in kinds:
             name = LEGEND_NAMES.get(k, k) if isinstance(k, str) else k[1]
             k = k if isinstance(k, str) else k[0]

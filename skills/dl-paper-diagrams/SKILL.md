@@ -24,7 +24,13 @@ Standard library only, no installs. Full spec reference: [references/spec.md](re
    - *block detail*: one repeated block (attention / MLP / residuals) with the trainable insets (LoRA `W₀ + BA`, adapters);
    - *objective*: logit/attention matrix with positives, masks, hard negatives and the formula next to it;
    - *inference*: how the trained parts are used at serving time (index, re-ranking, ANN tricks).
-3. **Lay out on a grid.** Data flows left → right, and repeated towers stack vertically with dashed "shared θ" links. Use relative coordinates (`"x": "enc.r+40"`) so blocks can be moved as a chain. Keep 30–50px between blocks, and size the canvas so nothing clips.
+3. **Fit the canvas to the content.** Read [compact layout](references/compact-layout.md).
+   Use 24–32px between adjacent modules as a starting point. Leave more space
+   only for labels, branches or a clear group boundary. Use relative coordinates
+   so connected blocks can move together. Reduce gaps and unused margins before
+   reducing text size. For repeated towers, fit the row pitch to the lowest side
+   input and its labels. For a matrix, put equations and notes in a neighbouring
+   column with a similar height. Set the canvas size after this arrangement.
 4. **Use the AF3 reference palette.** Keep each colour's meaning fixed:
    - `frozen`: navy `#233b91`; `train`: orange `#e8a446`;
    - `tensor`: sky blue `#a5d3f2`; `loss`: pink `#be6089`;
@@ -61,6 +67,9 @@ Pipelines, infra and data flows (jobs, tables, services) read better as plain me
 
 ## Preview after each change
 
-After each requested change, render both example figures to PNG. Check the
-actual images, then show both previews in the reply. Do not return only links
-to source files. Wait for fonts to load before capture.
+After each requested change, render both example figures to PNG. Wait for
+Newsreader to load. Inspect each full figure and its dense regions. If the user
+asks for visual refinement, make a change, render it, inspect it, and use that
+inspection to choose the next change. Keep the previous pass for comparison.
+Check text bounds, connections and scientific meaning after each pass. Show
+both final previews in the reply. Do not return only links to source files.

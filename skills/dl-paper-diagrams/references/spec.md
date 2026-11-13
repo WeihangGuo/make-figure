@@ -9,6 +9,7 @@ A spec is one JSON object. Coordinates are in SVG pixels, origin at the top left
   "page_title": "…",                 // HTML <title>, defaults to title
   "width": 1200, "height": 480,
   "legend": ["frozen", "train", "tensor", "loss"],   // kinds, or [kind, "custom name"]
+  "legend_align": "center",          // optional; default is left
   "caption": "…",                    // italic line above the legend
   "nodes": [ … ],                    // drawn in order; a node may reference earlier ones
   "edges": [ … ],                    // drawn under the nodes
@@ -78,3 +79,8 @@ Light mode uses 18% base colour and 82% white for fills. Strokes use the base
 colour. Dark mode uses 25% base colour and 75% background for fills; strokes
 use 65% base colour and 35% white. Plain blocks and operators stay neutral.
 Use labels to distinguish hard negatives from trainable blocks.
+
+## Canvas size
+
+Fit width and height to the content. The renderer does not remove empty space.
+Use the [compact layout guide](compact-layout.md) before setting final dimensions.

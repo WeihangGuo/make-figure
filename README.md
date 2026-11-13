@@ -8,6 +8,12 @@ A Claude Code / Agent skill that draws neural-network figures in the style of ML
 
 ![logit matrix example](skills/dl-paper-diagrams/examples/infonce_logits.svg)
 
+## Layout
+
+Figures use short connections and a canvas fitted to their content. Read the
+[compact layout guide](skills/dl-paper-diagrams/references/compact-layout.md).
+After a change, render and inspect both examples before delivery.
+
 ## Font
 
 All figure text uses Newsreader. Regular and italic font files are embedded
