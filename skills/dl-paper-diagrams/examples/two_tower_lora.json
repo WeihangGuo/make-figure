@@ -1,8 +1,7 @@
 {
   "name": "two_tower_lora",
-  "title": "Fig. 1. Two-tower retrieval encoder with LoRA and a Matryoshka head",
   "width": 1040,
-  "height": 380,
+  "height": 356,
   "legend": [
     "frozen",
     "train",
@@ -67,7 +66,7 @@
       "id": "xa",
       "type": "tensor",
       "x": 30,
-      "y": 85,
+      "y": 61,
       "w": 70,
       "h": 40,
       "label": "x_{a}",
@@ -82,7 +81,7 @@
       "id": "enc_a",
       "type": "block",
       "x": 140,
-      "y": 60,
+      "y": 36,
       "w": 220,
       "h": 90,
       "stack": true,
@@ -111,7 +110,7 @@
       "id": "pool_a",
       "type": "block",
       "x": "enc_a.r+30",
-      "y": 78,
+      "y": 54,
       "w": 96,
       "h": 54,
       "label": [
@@ -128,7 +127,7 @@
       "type": "block",
       "kind": "side",
       "x": "pool_a.l",
-      "y": 145,
+      "y": 121,
       "w": 96,
       "h": 30,
       "label": [
@@ -142,7 +141,7 @@
       "id": "phi_a",
       "type": "tensor",
       "x": "pool_a.r+30",
-      "y": 50,
+      "y": 26,
       "w": 24,
       "h": 110,
       "segments": [
@@ -174,7 +173,7 @@
       "type": "block",
       "kind": "train",
       "x": "phi_a.r+30",
-      "y": 65,
+      "y": 41,
       "w": 150,
       "h": 80,
       "label": [
@@ -194,7 +193,7 @@
       "type": "tensor",
       "kind": "train",
       "x": "head_a.r+30",
-      "y": 55,
+      "y": 31,
       "w": 22,
       "h": 100,
       "segments": [
@@ -221,7 +220,7 @@
       "id": "xc",
       "type": "tensor",
       "x": 30,
-      "y": 235,
+      "y": 211,
       "w": 70,
       "h": 40,
       "label": "x_{c}",
@@ -233,7 +232,7 @@
       "id": "enc_c",
       "type": "block",
       "x": 140,
-      "y": 210,
+      "y": 186,
       "w": 220,
       "h": 90,
       "stack": true,
@@ -259,7 +258,7 @@
       "id": "pool_c",
       "type": "block",
       "x": "enc_c.r+30",
-      "y": 228,
+      "y": 204,
       "w": 96,
       "h": 54,
       "label": [
@@ -273,7 +272,7 @@
       "type": "block",
       "kind": "side",
       "x": "pool_c.l",
-      "y": 295,
+      "y": 271,
       "w": 96,
       "h": 30,
       "label": [
@@ -286,7 +285,7 @@
       "id": "phi_c",
       "type": "tensor",
       "x": "pool_c.r+30",
-      "y": 200,
+      "y": 176,
       "w": 24,
       "h": 110,
       "segments": [
@@ -315,7 +314,7 @@
       "type": "block",
       "kind": "train",
       "x": "phi_c.r+30",
-      "y": 215,
+      "y": 191,
       "w": 150,
       "h": 80,
       "label": [
@@ -333,7 +332,7 @@
       "type": "tensor",
       "kind": "train",
       "x": "head_c.r+30",
-      "y": 205,
+      "y": 181,
       "w": 22,
       "h": 100,
       "segments": [
@@ -356,7 +355,7 @@
       "id": "sim",
       "type": "op",
       "x": "e_a.r+30",
-      "y": 152,
+      "y": 128,
       "w": 56,
       "label": [
         "s\u00b7cos"
@@ -488,5 +487,6 @@
       ]
     }
   ],
-  "legend_align": "center"
+  "legend_align": "center",
+  "page_title": "Fig. 1. Two-tower retrieval encoder with LoRA and a Matryoshka head"
 }

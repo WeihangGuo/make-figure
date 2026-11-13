@@ -16,7 +16,8 @@ After a change, render and inspect both examples before delivery.
 
 ## Font
 
-All figure text uses Newsreader. Regular and italic font files are embedded
+All figure text uses Newsreader and black ink. Figures have no visible title
+unless requested. Regular and italic font files are embedded
 in the SVG, so browser previews do not need a local font installation.
 The font uses the SIL Open Font License; see `assets/fonts/OFL.txt` inside the skill.
 

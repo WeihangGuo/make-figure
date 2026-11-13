@@ -121,6 +121,8 @@ class Layout:
 class Renderer:
     def __init__(self, spec: dict, dark: bool = False):
         self.spec = spec
+        # Black text needs a light figure even when the surrounding page is dark.
+        dark = dark and spec.get("allow_text_color", False)
         self.pal = DARK if dark else KINDS
         self.ink = "#e8e8e8" if dark else "#222222"
         self.sub = "#aaaaaa" if dark else "#555555"
@@ -132,7 +134,7 @@ class Renderer:
 
     # -- primitives
     def text(self, x, y, s, size=13, anchor="middle", color=None, bold=False, mono=False, italic=False, cls=""):
-        attrs = f'x="{x:.1f}" y="{y:.1f}" font-size="{size}" text-anchor="{anchor}" fill="{color or self.ink}"'
+        attrs = f'x="{x:.1f}" y="{y:.1f}" font-size="{size}" text-anchor="{anchor}" fill="{(color or self.ink) if self.spec.get("allow_text_color", False) else "#000000"}"'
         if bold:
             attrs += ' font-weight="bold"'
         if mono:
@@ -323,7 +325,7 @@ class Renderer:
     def render(self) -> str:
         s = self.spec
         W, H = s.get("width", 1200), s.get("height", 500)
-        if s.get("title"):
+        if s.get("show_title", False) and s.get("title"):
             self.text(W / 2, 28, s["title"], size=16, bold=True)
         body_start = len(self.out)
         for n in s.get("nodes", []):
@@ -375,7 +377,6 @@ path.edge.hl{stroke-width:2.6 !important;stroke:var(--acc) !important}
 #step{min-height:22px;color:var(--sub);margin:8px 2px 0}
 .cap{color:var(--sub);font-size:13px;margin:8px 2px}
 </style></head><body><main>
-<h1>__TITLE__</h1>
 <div class="bar" id="bar"></div>
 <div class="fig" id="fig">__SVG__</div>
 <div id="step"></div>
@@ -436,7 +437,7 @@ def main():
     ap.add_argument("-o", "--out", default=None, help="output dir (default: next to the spec)")
     ap.add_argument("--svg-only", action="store_true")
     ap.add_argument("--html-only", action="store_true")
-    ap.add_argument("--dark", action="store_true", help="dark palette for the static SVG")
+    ap.add_argument("--dark", action="store_true", help="dark palette for the static SVG (requires allow_text_color in the spec)")
     a = ap.parse_args()
     p = Path(a.spec)
     spec = json.loads(p.read_text())

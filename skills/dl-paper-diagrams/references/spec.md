@@ -5,8 +5,9 @@ A spec is one JSON object. Coordinates are in SVG pixels, origin at the top left
 ```jsonc
 {
   "name": "fig_arch",               // output file stem (default: spec file stem)
-  "title": "Fig. 1. …",              // drawn at the top
-  "page_title": "…",                 // HTML <title>, defaults to title
+  "page_title": "Architecture",     // browser metadata only
+  "show_title": false,               // show a title only if the user requests it
+  "allow_text_color": false,         // default: all figure text is black
   "width": 1200, "height": 480,
   "legend": ["frozen", "train", "tensor", "loss"],   // kinds, or [kind, "custom name"]
   "legend_align": "center",          // optional; default is left
@@ -84,3 +85,15 @@ Use labels to distinguish hard negatives from trainable blocks.
 
 Fit width and height to the content. The renderer does not remove empty space.
 Use the [compact layout guide](compact-layout.md) before setting final dimensions.
+
+## Text and titles
+
+All figure text is black by default, including muted labels, badges and legends.
+Shape and line colours still use the AF3 palette. `allow_text_color: true`
+enables the role-based text colours only when the user requests coloured text.
+A dark figure requires this option; otherwise `--dark` keeps the figure light.
+The HTML page can still use its own dark interface.
+
+`title` does not draw a heading unless `show_title: true`. Use that option only
+when the user requests a visible title. `page_title` sets browser metadata.
+The HTML viewer does not add a separate heading above the figure.

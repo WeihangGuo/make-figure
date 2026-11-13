@@ -37,8 +37,7 @@ Standard library only, no installs. Full spec reference: [references/spec.md](re
    - `target`: green `#489750`; `side`: steel blue `#6289ad`;
    - `hard`: orange `#e8a446`; `mask`: grey `#c2c2c2`.
    Use white backgrounds and light fills. Keep labels dark. The renderer uses
-   these base colours for strokes and mixes them with white for fills. Dark
-   mode keeps the same colour families. Add a legend. Label hard negatives
+   these base colours for strokes and mixes them with white for fills. The palette applies to shapes and lines, not text. Add a legend. Label hard negatives
    explicitly when trainable blocks also use orange. Do not add other accent
    colours unless the user requests them.
 5. **Put shapes everywhere.** Draw a tensor bar with `label` + `dim`, and give each block a `shape` like `[T, 2048] → [2048]` for the tooltip. Use `segments` for concatenations (`[w; z]`) and Matryoshka prefixes.
@@ -53,7 +52,14 @@ Standard library only, no installs. Full spec reference: [references/spec.md](re
 
 ## Style rules (what makes it look like a paper)
 
-- Title as a caption: `"Fig. N. <what it shows>"`. Optional `caption` underneath for the one non-obvious detail.
+- Do not add a figure title or figure number unless the user asks for one.
+  `page_title` is browser metadata only. Set `show_title: true` only for an
+  explicit title request. Remove the unused title space from the layout.
+- All figure text must be black (`#000000`), including labels, dimensions,
+  equations, badges, legends and captions. Do not use grey for secondary text
+  or palette colours for emphasis. Set `allow_text_color: true` only when the
+  user explicitly requests coloured text. The default figure stays light even
+  on a dark page so black text remains readable.
 - Labels are math-like, written with inline markup (`e_{a}`, `ℝ^{2048}`, `W_{0}`, `**bold**`, `` `mono` ``). Unicode: `ℒ φ θ ⊕ ⊃ 𝕊 ℓ₂ ⟨⟩ ×`.
 - Repeated stacks: `"stack": true` + `"badge": "× L"`. Trainable insets inside frozen blocks: `"strip": {"kind": "train", "label": ["LoRA", "r=16"]}`.
 - Operators as circles (`type: op`: `+`, `⊕`, `·`, `s·cos`). Residual paths run along the side with `via` points.

@@ -1,8 +1,7 @@
 {
   "name": "infonce_logits",
-  "title": "Fig. 2. InfoNCE: in-batch and hard negatives",
   "width": 600,
-  "height": 290,
+  "height": 266,
   "legend": [
     "target",
     "tensor",
@@ -15,7 +14,7 @@
       "id": "M",
       "type": "matrix",
       "x": 40,
-      "y": 80,
+      "y": 56,
       "rows": 5,
       "cols": 7,
       "cell": 32,
@@ -62,7 +61,7 @@
       "id": "f1",
       "type": "text",
       "x": 330,
-      "y": 232,
+      "y": 208,
       "label": [
         "\u2113_{ij} = s\u00b7\u27e8e_{a_i}, e_{c_j}\u27e9 \u2212 \u03bb_{j}",
         "\u2112 = \u03a3_{i} w_{i}\u00b7CE(\u2113_{i\u00b7}, i) / \u03a3_{i} w_{i}"
@@ -74,7 +73,7 @@
       "id": "f2",
       "type": "text",
       "x": 330,
-      "y": 88,
+      "y": 64,
       "label": [
         "\u03bb_{j} = 0: plain InfoNCE",
         "\u03bb_{j} = \u03b1\u00b7log Q(c_{j}): logQ correction",
@@ -91,18 +90,19 @@
   "notes": [
     {
       "x": 120,
-      "y": 48,
+      "y": 24,
       "text": "in-batch candidates (B \u00d7 B)",
       "muted": true,
       "size": 11
     },
     {
       "x": 242,
-      "y": 48,
+      "y": 24,
       "text": "hard neg. (B \u00d7 K)",
       "muted": true,
       "size": 11
     }
   ],
-  "legend_align": "center"
+  "legend_align": "center",
+  "page_title": "Fig. 2. InfoNCE: in-batch and hard negatives"
 }
