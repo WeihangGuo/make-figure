@@ -58,3 +58,23 @@ Interactive-layer fields: `title`, `shape`, `info`, `params`. The tooltip shows 
 ## Inline markup
 
 `x_{i}`, `x^{2}` → subscript/superscript; bare `x_i`, `x^2` only after a 1–2-letter symbol (so `zelda_v2`, `qual_w` stay as is); `**bold**`; `` `mono` ``. Markup is supported in labels, notes and tooltips.
+
+## Default palette
+
+The default colours come from the supplied AF3 reference image.
+
+| Kind | Base colour |
+|---|---|
+| frozen | Navy `#233b91` |
+| train | Orange `#e8a446` |
+| tensor | Sky blue `#a5d3f2` |
+| loss | Pink `#be6089` |
+| target | Green `#489750` |
+| side | Steel blue `#6289ad` |
+| hard | Orange `#e8a446` |
+| mask | Grey `#c2c2c2` |
+
+Light mode uses 18% base colour and 82% white for fills. Strokes use the base
+colour. Dark mode uses 25% base colour and 75% background for fills; strokes
+use 65% base colour and 35% white. Plain blocks and operators stay neutral.
+Use labels to distinguish hard negatives from trainable blocks.

@@ -8,6 +8,12 @@ A Claude Code / Agent skill that draws neural-network figures in the style of ML
 
 ![logit matrix example](skills/dl-paper-diagrams/examples/infonce_logits.svg)
 
+## Colours
+
+The default palette follows the supplied AF3 reference: navy, orange, green,
+sky blue, steel blue, grey and pink. Each colour has a fixed role. See the
+[palette table](skills/dl-paper-diagrams/references/spec.md#default-palette).
+
 ## Install
 
 As a Claude Code plugin, from the terminal:

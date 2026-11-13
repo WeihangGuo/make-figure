@@ -15,26 +15,34 @@ import sys
 from pathlib import Path
 
 # ---------------------------------------------------------------- palette ---
-# kind -> (fill, stroke). Paper convention: blue = frozen, orange = trainable,
-# grey = tensor / activation, red = loss, green = target / positive, purple = side input.
-KINDS = {
-    "frozen": ("#dcebf7", "#3f74a8"),
-    "train": ("#fde3c8", "#d17a22"),
-    "tensor": ("#eeeeee", "#777777"),
-    "loss": ("#f7d4d4", "#b33a3a"),
-    "target": ("#d3ebd3", "#4b8b4b"),
-    "side": ("#e6d9f2", "#7a52a0"),
-    "hard": ("#fbe9b7", "#b8901c"),
-    "mask": ("#d9d9d9", "#9a9a9a"),
-    "plain": ("#ffffff", "#444444"),
-    "op": ("#ffffff", "#444444"),
+# Base colours sampled from the user-supplied AF3 palette.
+PALETTE = {
+    "navy": "#233b91", "orange": "#e8a446", "green": "#489750",
+    "sky": "#a5d3f2", "steel": "#6289ad", "grey": "#c2c2c2",
+    "pink": "#be6089",
 }
-DARK = {  # same semantics, tuned for a dark page
-    "frozen": ("#1f3a55", "#6fa3d6"), "train": ("#5a3714", "#f0a050"), "tensor": ("#3a3a3a", "#9a9a9a"),
-    "loss": ("#5a2323", "#e06b6b"), "target": ("#1f4a2a", "#6cc07a"), "side": ("#3d2a55", "#b58be0"),
-    "hard": ("#55461a", "#e0bd4a"), "mask": ("#4a4a4a", "#8a8a8a"), "plain": ("#1e1e1e", "#bbbbbb"),
-    "op": ("#1e1e1e", "#bbbbbb"),
+ROLE_COLOURS = {
+    "frozen": "navy", "train": "orange", "tensor": "sky", "loss": "pink",
+    "target": "green", "side": "steel", "hard": "orange", "mask": "grey",
 }
+
+
+def blend(colour, background, amount):
+    """Mix a base colour with a background. Amount is the background fraction."""
+    channels = [round(int(colour[i:i+2], 16) * (1 - amount)
+                      + int(background[i:i+2], 16) * amount) for i in (1, 3, 5)]
+    return "#" + "".join(f"{c:02x}" for c in channels)
+
+
+# Light fills keep labels readable. Strokes retain the reference colours.
+KINDS = {kind: (blend(PALETTE[name], "#ffffff", 0.82), PALETTE[name])
+         for kind, name in ROLE_COLOURS.items()}
+KINDS.update({"plain": ("#ffffff", "#444444"), "op": ("#ffffff", "#444444")})
+# Dark mode uses the same colour families with lighter strokes.
+DARK = {kind: (blend(PALETTE[name], "#141414", 0.75),
+               blend(PALETTE[name], "#ffffff", 0.35))
+        for kind, name in ROLE_COLOURS.items()}
+DARK.update({"plain": ("#1e1e1e", "#bbbbbb"), "op": ("#1e1e1e", "#bbbbbb")})
 LEGEND_NAMES = {"frozen": "frozen", "train": "trainable", "tensor": "tensor", "loss": "loss", "target": "target / positive",
                 "side": "side input", "hard": "hard negative", "mask": "masked"}
 FONT = "Helvetica, Arial, sans-serif"
@@ -328,9 +336,9 @@ HTML = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>__TITLE__</title>
 <style>
-:root{--bg:#fafafa;--card:#fff;--ink:#222;--sub:#666;--line:#ddd;--acc:#d17a22}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111;--card:#1b1b1b;--ink:#e8e8e8;--sub:#aaa;--line:#333;--acc:#f0a050}}
-:root[data-theme="dark"]{--bg:#111;--card:#1b1b1b;--ink:#e8e8e8;--sub:#aaa;--line:#333;--acc:#f0a050}
+:root{--bg:#fafafa;--card:#fff;--ink:#222;--sub:#666;--line:#ddd;--acc:#233b91}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111;--card:#1b1b1b;--ink:#e8e8e8;--sub:#aaa;--line:#333;--acc:#a5d3f2}}
+:root[data-theme="dark"]{--bg:#111;--card:#1b1b1b;--ink:#e8e8e8;--sub:#aaa;--line:#333;--acc:#a5d3f2}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Helvetica,Arial,sans-serif}
 main{max-width:1280px;margin:0 auto;padding:16px}
 h1{font-size:18px;margin:4px 0 10px}

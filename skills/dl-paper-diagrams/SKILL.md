@@ -25,10 +25,16 @@ Standard library only, no installs. Full spec reference: [references/spec.md](re
    - *objective*: logit/attention matrix with positives, masks, hard negatives and the formula next to it;
    - *inference*: how the trained parts are used at serving time (index, re-ranking, ANN tricks).
 3. **Lay out on a grid.** Data flows left → right, and repeated towers stack vertically with dashed "shared θ" links. Use relative coordinates (`"x": "enc.r+40"`) so blocks can be moved as a chain. Keep 30–50px between blocks, and size the canvas so nothing clips.
-4. **Encode semantics in colour, not decoration.** The `kind` values are fixed:
-   - `frozen` blue, `train` orange, `tensor` grey, `loss` red;
-   - `target` green, `side` purple (side inputs), `hard` yellow (hard negatives / highlighted slice), `mask` dark grey.
-   Always add a `legend`.
+4. **Use the AF3 reference palette.** Keep each colour's meaning fixed:
+   - `frozen`: navy `#233b91`; `train`: orange `#e8a446`;
+   - `tensor`: sky blue `#a5d3f2`; `loss`: pink `#be6089`;
+   - `target`: green `#489750`; `side`: steel blue `#6289ad`;
+   - `hard`: orange `#e8a446`; `mask`: grey `#c2c2c2`.
+   Use white backgrounds and light fills. Keep labels dark. The renderer uses
+   these base colours for strokes and mixes them with white for fills. Dark
+   mode keeps the same colour families. Add a legend. Label hard negatives
+   explicitly when trainable blocks also use orange. Do not add other accent
+   colours unless the user requests them.
 5. **Put shapes everywhere.** Draw a tensor bar with `label` + `dim`, and give each block a `shape` like `[T, 2048] → [2048]` for the tooltip. Use `segments` for concatenations (`[w; z]`) and Matryoshka prefixes.
 6. **Add the interactive layer.** For every non-trivial block, set `info` (one or two sentences: what it does and why) and `params` (sizes). `steps` walk the reader through the forward pass; `tags` group blocks (trainable, one tower, the objective).
 7. **Render and look at the result.** View the SVG and fix overlaps:
